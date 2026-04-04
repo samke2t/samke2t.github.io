@@ -1,1 +1,6 @@
+const btn = document.getElementById("helloBtn");
+const message = document.getElementById("message");
 
+btn.addEventListener("click", function () {
+  message.textContent = "You clicked the button. Now your webpage has interaction!";
+});
