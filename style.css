@@ -39,7 +39,7 @@
     --terracotta-dark: #111111;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 body {
     font-family: 'Inter', sans-serif;
@@ -144,7 +144,7 @@ header {
 nav {
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: clamp(0.9rem, 1.8vw, 2.5rem);
 }
 
 nav a {
@@ -206,22 +206,140 @@ section {
     letter-spacing: -0.01em;
 }
 
+.members-section {
+    background-color: var(--paper-bg);
+}
+
+.members-header {
+    margin-bottom: 2.5rem;
+}
+
+.members-grid {
+    display: grid;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+@media (min-width: 900px) {
+    .members-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 1fr;
+    }
+}
+
+.member-card {
+    background: var(--paper-white);
+    border: 1px solid var(--slate-200);
+    border-radius: 0.125rem;
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    min-height: 13rem;
+    height: 100%;
+    overflow: hidden;
+}
+
+.member-photo {
+    background: var(--slate-100);
+    border-right: 1px solid var(--slate-200);
+    min-height: 100%;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(35%);
+    transition: filter 0.3s;
+}
+
+.member-card:hover .member-photo img {
+    filter: grayscale(0%);
+}
+
+.member-info {
+    padding: 1.35rem 1.45rem;
+}
+
+.member-info h3 {
+    color: var(--charcoal);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 0.65rem;
+}
+
+.member-program {
+    color: var(--slate-500);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+.member-contributions {
+    display: grid;
+    gap: 0.45rem;
+    list-style: none;
+}
+
+.member-contributions li {
+    color: var(--slate-600);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    padding-left: 0.9rem;
+    position: relative;
+}
+
+.member-contributions li::before {
+    content: '';
+    position: absolute;
+    top: 0.66em;
+    left: 0;
+    width: 0.25rem;
+    height: 0.25rem;
+    background: var(--terracotta);
+    border-radius: 50%;
+}
+
+@media (max-width: 640px) {
+    .member-card {
+        grid-template-columns: 1fr;
+    }
+
+    .member-photo {
+        aspect-ratio: 16 / 9;
+        border-right: 0;
+        border-bottom: 1px solid var(--slate-200);
+    }
+
+    .member-info {
+        padding: 1.25rem;
+    }
+}
+
+.research-section-header {
+    flex-wrap: wrap;
+    row-gap: 1.25rem;
+}
+
+.research-section-header .quote-archive {
+    flex: 0 0 100%;
+}
+
 .research-archive-grid {
     display: grid;
-    gap: 2rem;
+    gap: 1rem;
+    align-items: stretch;
     margin-bottom: 4rem;
 }
 
 @media (min-width: 1024px) {
     .research-archive-grid {
-        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-}
-
-.archive-column {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
 }
 
 .motivation-card {
@@ -229,22 +347,26 @@ section {
     padding: 2rem;
     border: 1px solid var(--slate-200);
     border-radius: 0.125rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 22rem;
 }
 
 .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    gap: 1rem;
     margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--slate-100);
 }
 
 .card-type {
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1rem;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: 0;
     color: var(--charcoal);
 }
 
@@ -254,31 +376,65 @@ section {
     font-family: 'DM Sans', sans-serif;
 }
 
+.research-card-copy {
+    color: var(--slate-600);
+    font-size: 0.96rem;
+    line-height: 1.68;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
 .quote-archive {
     background-color: var(--charcoal);
     color: var(--paper-bg);
-    padding: 2.5rem;
+    padding: 1.35rem 2rem;
     border-radius: 0.125rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
+    gap: 1.25rem;
+    grid-column: 1 / -1;
     justify-content: center;
+    min-height: 5rem;
     text-align: center;
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.2rem;
-    font-weight: 300;
-    line-height: 1.6;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.quote-mark {
+    color: var(--paper-bg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+@media (max-width: 640px) {
+    .motivation-card {
+        min-height: auto;
+        padding: 1.5rem;
+    }
+
+    .card-type {
+        font-size: 1.85rem;
+    }
+
+    .quote-archive {
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+        font-size: 1.25rem;
+    }
+
+    .quote-mark {
+        font-size: 2rem;
+    }
 }
 
 .references-archive {
     display: grid;
     gap: 3rem;
-}
-
-@media (min-width: 1024px) {
-    .references-archive {
-        grid-template-columns: 1fr 1fr;
-    }
 }
 
 .reference-group-title {
@@ -309,40 +465,232 @@ section {
 
 .reference-cards {
     display: grid;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
-.reference-card {
+.papers-grid {
+    display: grid;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.papers-column {
+    display: contents;
+}
+
+@media (max-width: 1023px) {
+    .papers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .papers-column:first-child .paper-review-card:nth-child(1) { grid-row: 1; }
+    .papers-column:nth-child(2) .paper-review-card:nth-child(1) { grid-row: 2; }
+    .papers-column:first-child .paper-review-card:nth-child(2) { grid-row: 3; }
+    .papers-column:nth-child(2) .paper-review-card:nth-child(2) { grid-row: 4; }
+}
+
+@media (min-width: 1024px) {
+    .papers-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 1fr;
+    }
+
+    .papers-column:first-child .paper-review-card:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .papers-column:nth-child(2) .paper-review-card:nth-child(1) {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .papers-column:first-child .paper-review-card:nth-child(2) {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .papers-column:nth-child(2) .paper-review-card:nth-child(2) {
+        grid-column: 2;
+        grid-row: 2;
+    }
+}
+
+.paper-review-card {
     background: var(--paper-white);
-    padding: 1.25rem;
+    padding: 1.5rem;
     border: 1px solid var(--slate-200);
     border-radius: 0.125rem;
     display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.paper-review-header {
+    display: flex;
     gap: 1rem;
     align-items: flex-start;
+    margin-bottom: 1.35rem;
 }
 
-.ref-label {
-    font-size: 0.6rem;
+.paper-icon {
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--slate-500);
+}
+
+.paper-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.paper-index {
+    color: var(--terracotta);
+    font-size: 0.62rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--terracotta);
-    background-color: rgba(184, 112, 90, 0.08);
-    padding: 0.25rem 0.5rem;
-    white-space: nowrap;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
 }
 
-.ref-title {
+.paper-review-header h4 {
+    color: var(--charcoal);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    line-height: 1.05;
+    margin-bottom: 0.25rem;
+}
+
+.paper-title {
     font-size: 0.8rem;
     font-weight: 500;
-    color: var(--slate-700);
+    color: var(--slate-500);
     line-height: 1.4;
+}
+
+.paper-review-grid {
+    display: grid;
+    gap: 1.2rem;
+    flex: 1;
+}
+
+@media (min-width: 900px) {
+    .paper-review-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .paper-review-column + .paper-review-column {
+        border-left: 1px solid var(--slate-200);
+        padding-left: 1.2rem;
+    }
+}
+
+.paper-review-column h5 {
+    color: var(--charcoal);
+    font-size: 0.76rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.65rem;
+}
+
+.paper-review-column ul {
+    display: grid;
+    gap: 0.55rem;
+    list-style: none;
+}
+
+.paper-review-column li,
+.paper-review-column p {
+    color: var(--slate-600);
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+
+.paper-review-column li {
+    padding-left: 0.85rem;
+    position: relative;
+}
+
+.paper-review-column li::before {
+    content: '';
+    position: absolute;
+    top: 0.63em;
+    left: 0;
+    width: 0.22rem;
+    height: 0.22rem;
+    background: var(--charcoal);
+    border-radius: 50%;
+}
+
+@media (min-width: 1024px) {
+    .paper-review-card {
+        padding: 1.15rem;
+    }
+
+    .paper-review-header {
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .paper-icon {
+        width: 1.45rem;
+        height: 1.45rem;
+        flex-basis: 1.45rem;
+    }
+
+    .paper-review-header h4 {
+        font-size: 1.18rem;
+    }
+
+    .paper-title {
+        font-size: 0.68rem;
+        line-height: 1.3;
+    }
+
+    .paper-review-grid {
+        gap: 0.75rem;
+    }
+
+    .paper-review-column + .paper-review-column {
+        padding-left: 0.75rem;
+    }
+
+    .paper-review-column h5 {
+        font-size: 0.68rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .paper-review-column ul {
+        gap: 0.42rem;
+    }
+
+    .paper-review-column li,
+    .paper-review-column p {
+        font-size: 0.66rem;
+        line-height: 1.5;
+    }
 }
 
 .product-cards {
     display: grid;
     gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .product-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1100px) {
+    .product-cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .product-archive-card {
@@ -602,6 +950,7 @@ section {
 }
 
 .sketch-thumb {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: var(--paper-white);
@@ -609,8 +958,22 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    padding-bottom: 0.5rem;
+    transition: all 0.2s;
+}
+
+.sketch-thumb {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--paper-white);
+    border: 1px solid var(--slate-200);
+    display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    overflow: hidden;
     transition: all 0.2s;
 }
 
@@ -619,18 +982,57 @@ section {
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
-.sketch-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--slate-300);
+.sketch-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
-.sketch-title {
-    font-size: 0.65rem;
+.sketch-thumb .sketch-num {
+    position: absolute;
+    bottom: 0.35rem;
+    right: 0.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--slate-400);
+    line-height: 1;
+}
+
+/* Labels row below the grid */
+.sketch-labels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.sketch-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.sketch-label .sketch-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--slate-400);
+    line-height: 1;
+}
+
+.sketch-label .sketch-title {
+    font-size: 0.55rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     color: var(--slate-500);
+    line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+    .sketch-labels {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .alternatives-comparison {
@@ -747,7 +1149,7 @@ section {
 .hero-inner {
     flex: 1;
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     gap: 4rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -791,6 +1193,17 @@ section {
     margin-bottom: 3rem;
 }
 
+.title-then {
+    display: block;
+    width: fit-content;
+}
+
+.title-now {
+    display: block;
+    width: fit-content;
+    margin-left: 0.9em;
+}
+
 .title-amp {
     display: block;
     font-size: 0.35em;
@@ -798,16 +1211,21 @@ section {
     letter-spacing: 0.2em;
     color: var(--slate-400);
     margin: 0.8rem 0;
-    padding-left: 0.5rem;
+    padding-left: calc(0.5rem + 1.8em);
 }
 
 .hero-tagline {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
     font-weight: 400;
-    color: var(--slate-600);
-    line-height: 1.6;
+    font-style: italic;
+    color: var(--paper-bg);
+    background-color: var(--charcoal);
+    line-height: 1.4;
     margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    width: fit-content;
 }
 
 .hero-desc {
@@ -816,7 +1234,6 @@ section {
     font-weight: 400;
     color: var(--slate-500);
     line-height: 1.7;
-    max-width: 480px;
     margin-bottom: 2.5rem;
 }
 
@@ -851,15 +1268,14 @@ section {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--slate-600);
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--slate-300);
-    transition: color 0.2s, border-color 0.2s;
+    color: var(--charcoal);
+    padding: 1rem 2rem;
+    background-color: #e5e7eb;
+    transition: background-color 0.2s;
 }
 
 .cta-secondary:hover {
-    color: var(--charcoal);
-    border-color: var(--charcoal);
+    background-color: #d1d5db;
 }
 
 /* Images Side - Asymmetrical Collage */
