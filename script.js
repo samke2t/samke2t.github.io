@@ -71,4 +71,3 @@ window.addEventListener('resize', () => {
         desktopNav.style.display = 'none';
     }
 });
-
