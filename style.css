@@ -545,19 +545,24 @@ section {
 .stakeholder-card {
     background: var(--paper-white);
     border: 1px solid var(--slate-200);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    padding: 1.35rem;
+    display: grid;
+    grid-template-rows: 1.75rem 1.35rem 2.6rem 1fr;
+    gap: 0.7rem;
     position: relative;
+    min-height: 24rem;
 }
 
 .stakeholder-icon-wrap {
     color: var(--warm-grey);
+    height: 1.75rem;
+    display: flex;
+    align-items: center;
 }
 
 .stakeholder-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-family: 'DM Sans', sans-serif;
     font-size: 0.65rem;
     font-weight: 700;
@@ -565,6 +570,8 @@ section {
     text-transform: uppercase;
     padding: 0.25rem 0.6rem;
     align-self: flex-start;
+    width: fit-content;
+    min-height: 1.35rem;
 }
 
 .stakeholder-badge-primary {
@@ -587,20 +594,29 @@ section {
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--charcoal);
-    line-height: 1.3;
+    line-height: 1.2;
+    min-height: 2.6rem;
+    display: flex;
+    align-items: flex-start;
 }
 
 .stakeholder-sections {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: minmax(7.25rem, 1fr) 6.7rem;
     gap: 0.75rem;
-    margin-top: 0.25rem;
+    margin-top: 0;
+    min-height: 0;
 }
 
 .stakeholder-section {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+}
+
+.stakeholder-sections > .stakeholder-section:first-child {
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--slate-200);
 }
 
 .stakeholder-section-label {
@@ -616,14 +632,14 @@ section {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.42rem;
 }
 
 .stakeholder-section ul li {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.78rem;
     color: var(--charcoal);
-    line-height: 1.5;
+    line-height: 1.45;
     padding-left: 0.75rem;
     position: relative;
 }
@@ -641,6 +657,33 @@ section {
     font-size: 0.78rem;
     color: var(--charcoal);
     line-height: 1.6;
+}
+
+.stakeholder-response-card {
+    margin-top: 0;
+    padding: 0.9rem;
+    background: var(--paper-bg);
+    border: 1px solid var(--slate-200);
+    border-radius: 0.125rem;
+    min-height: 0;
+    justify-content: space-between;
+}
+
+.stakeholder-response-card .stakeholder-section-label {
+    color: var(--charcoal);
+}
+
+.stakeholder-response-highlight {
+    background: #1c1b19;
+    border-color: #1c1b19;
+}
+
+.stakeholder-response-highlight .stakeholder-section-label {
+    color: #c9bfae;
+}
+
+.stakeholder-response-highlight p {
+    color: #f4f0e8;
 }
 
 .paper-review-card {
@@ -1033,7 +1076,6 @@ section {
     display: grid;
     gap: 1.5rem;
     padding-top: 2rem;
-    border-top: 1px solid var(--slate-200);
 }
 
 @media (min-width: 768px) {
@@ -1043,28 +1085,168 @@ section {
 }
 
 .principle-item {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.15rem;
+    align-items: start;
+    background: var(--paper-white);
+    border: 1px solid var(--slate-200);
+    border-radius: 0.125rem;
+    padding: 1.35rem;
+    min-height: 18rem;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.principle-item:hover {
+    border-color: var(--slate-300);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.045);
+    transform: translateY(-1px);
+}
+
+.principle-selected {
+    background: #eef3f6;
+    border-color: #9fb0bc;
+}
+
+.principle-considered {
+    background: var(--paper-white);
+    border-color: var(--slate-200);
+}
+
+.principle-rejected {
+    background: var(--slate-100);
+    border-color: var(--slate-200);
+    opacity: 0.78;
 }
 
 .principle-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: var(--terracotta);
+    font-size: 1.65rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    line-height: 1;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--slate-200);
+    background: var(--paper-bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 3rem;
+}
+
+.principle-selected .principle-num {
+    background: #2f3b45;
+    border-color: #2f3b45;
+    color: var(--paper-bg);
+}
+
+.principle-considered .principle-num {
+    background: var(--paper-bg);
+    color: var(--charcoal);
+}
+
+.principle-rejected .principle-num {
+    background: var(--slate-200);
+    border-color: var(--slate-200);
+    color: var(--slate-500);
+}
+
+.principle-selected .principle-content h4 {
+    color: #22313b;
+}
+
+.principle-rejected .principle-content h4,
+.principle-rejected .principle-points li,
+.principle-rejected .principle-related {
+    color: var(--slate-500);
+}
+
+.principle-content {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
 }
 
 .principle-content h4 {
-    font-size: 0.85rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
     font-weight: 600;
     color: var(--charcoal);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.55rem;
+    line-height: 1.12;
 }
 
 .principle-content p {
     font-size: 0.75rem;
     color: var(--warm-grey);
+    line-height: 1.55;
+}
+
+.principle-status {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 1.1rem;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--slate-300);
+    border-radius: 999px;
+    font-size: 0.58rem;
+    font-weight: 700;
+    color: var(--slate-600);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.principle-status.selected {
+    border-color: #9fb0bc;
+    background: rgba(47, 59, 69, 0.08);
+    color: #2f3b45;
+}
+
+.principle-status.considered {
+    background: var(--paper-bg);
+}
+
+.principle-status.rejected {
+    border-color: var(--slate-200);
+    color: var(--slate-400);
+}
+
+.principle-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem 0;
+    margin: 0 0 0.95rem;
+    border-top: 1px solid var(--slate-200);
+    border-bottom: 1px solid var(--slate-200);
+}
+
+.principle-points li {
+    position: relative;
+    padding-left: 0.95rem;
+    font-size: 0.78rem;
+    color: var(--charcoal);
+    line-height: 1.5;
+}
+
+.principle-points li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--warm-grey);
+}
+
+.principle-related {
+    margin-top: auto;
+    color: var(--slate-500);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 /* Ideation Section - Design Studio Wall */
@@ -1081,6 +1263,23 @@ section {
     letter-spacing: 0.12em;
     color: var(--slate-500);
     margin-bottom: 1.25rem;
+}
+
+.alternatives-label {
+    margin-top: 3rem;
+}
+
+.prototype-heading {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 2.25rem;
+    margin-top: 3rem;
+}
+
+.prototype-heading .prototype-label {
+    margin: 0;
 }
 
 .sketch-grid {
@@ -1276,6 +1475,148 @@ section {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+}
+
+.lowfi-showcase {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.4rem;
+    align-items: stretch;
+}
+
+.lowfi-card {
+    background: var(--paper-white);
+    border: 1px solid var(--slate-200);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.lowfi-card:hover {
+    border-color: var(--slate-300);
+    box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.12);
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.lowfi-thumb {
+    aspect-ratio: 9 / 19;
+    background: var(--slate-100);
+    border-bottom: 1px solid var(--slate-200);
+    overflow: hidden;
+    position: relative;
+}
+
+.lowfi-thumb img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.lowfi-content {
+    background: var(--charcoal);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.25rem;
+}
+
+.lowfi-kicker {
+    color: var(--slate-300);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.45rem;
+    text-transform: uppercase;
+}
+
+.lowfi-content h3 {
+    color: var(--paper-bg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.05;
+    margin-bottom: 0.65rem;
+}
+
+.lowfi-desc,
+.lowfi-interaction {
+    color: var(--slate-200);
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+
+.lowfi-interaction {
+    color: var(--paper-bg);
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: margin-top 0.2s, max-height 0.2s, opacity 0.2s;
+}
+
+.lowfi-card:hover .lowfi-interaction,
+.lowfi-card:focus-within .lowfi-interaction {
+    margin-top: 0.75rem;
+    max-height: 4rem;
+    opacity: 1;
+}
+
+.lowfi-prototype-link {
+    align-items: center;
+    background: var(--slate-700);
+    border-radius: 0.125rem;
+    color: var(--paper-bg);
+    display: inline-flex;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.2s;
+    white-space: nowrap;
+}
+
+.lowfi-prototype-link:hover,
+.lowfi-prototype-link:focus-visible {
+    background: var(--slate-500);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 1023px) {
+    .lowfi-showcase {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .lowfi-showcase {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .lowfi-card:hover {
+        transform: none;
+    }
+
+    .lowfi-content {
+        padding: 1.15rem;
+    }
+
+    .lowfi-interaction {
+        margin-top: 0.75rem;
+        max-height: none;
+        opacity: 1;
+    }
 }
 
 /* ===== HERO - EDITORIAL ART PROJECT ===== */
@@ -1918,6 +2259,8 @@ footer {
     background-color: var(--charcoal);
     color: var(--paper-bg);
     padding: 4rem 2rem;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
 }
 
 .footer-content {
